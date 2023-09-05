@@ -6,17 +6,16 @@ from model import Base
 
 
 class ModeloSchema(BaseModel):
-    """Define como um novo registro de modelo de veículo será inserido """
-    codigo: int = 1
-    nome: str = "GM"
- 
-
+    """Define como um novo registro de modelo de veículo será inserido """    
+    nome: str = "Onix"
+    codigo_marca: int = 1
 
 class ModeloViewSchema(BaseModel):
     """ Define como uma modelo de veículo deverá retornado: modelo
     """
     codigo: int = 1
-    nome: str = "GM"    
+    nome: str = "GM"  
+    codigo_marca = int = 1  
 
 
 class ModeloEditSchema(BaseModel):
@@ -67,8 +66,8 @@ def apresenta_lista_modelo(lista: List[Modelo]):
     for item in lista:
        
         result.append({
-            "codigo": item.cod_marca,
-            "nome": item.nom_marca,
+            "codigo": item.cod_modelo,
+            "nome": item.nom_modelo,
             "codigo_marca": item.cod_marca
         })
 

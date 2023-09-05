@@ -1,81 +1,53 @@
-[2023-09-04 19:54:49,894] ERROR log_exception() L1449 Exception on /marca [POST] - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-           ^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C\app.py", line 53, in add_marca
-    marca = Marca(
-      ^^^^^^^^^^^^
-TypeError: __init__() got an unexpected keyword argument 'des_nome'
-[2023-09-04 19:54:49,902] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:54:49] "[35m[1mPOST /marca HTTP/1.1[0m" 500 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:51,422] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-04 20:57:32,896] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:32,900] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:43,735] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
- * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:53,687] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:53] "[32mGET / HTTP/1.1[0m" 302 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:53,711] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:53] "GET /openapi/ HTTP/1.1" 200 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:53,782] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:53] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:53,807] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:53] "[36mGET /openapi/static/images/redoc.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:53,813] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:53] "[36mGET /openapi/static/images/rapidoc.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,684] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,706] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,710] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,711] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,844] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:56:54,856] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:56:54] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:57:06,785] ERROR log_exception() L1449 Exception on /marca [POST] - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-           ^^^^^^^^^^^^
-  File "C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C\app.py", line 53, in add_marca
-    marca = Marca(
-      ^^^^^^^^^^^^
-TypeError: __init__() got an unexpected keyword argument 'des_nome'
-[2023-09-04 19:57:06,790] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:57:06] "[35m[1mPOST /marca HTTP/1.1[0m" 500 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:16,305] INFO _log() L224   * Running on all addresses (0.0.0.0)
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:46,855] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:46,954] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:46,963] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:46,964] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:47,041] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:47] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:57:47,046] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:47] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:58:02,546] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:58:02] "GET /modelos HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:58:18,320] WARNING upd_modelo() L340  Erro ao editar a marca com o nome  #'PULSE', Não foi possível editar a marca :/<method-wrapper '__str__' of AttributeError object at 0x000001ECEE2C9930> - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L340 
+[2023-09-04 20:58:18,321] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:58:18] "[35m[1mPUT /modelo HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:32,720] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
- * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:18,062] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:18] "[32mGET / HTTP/1.1[0m" 302 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:18,090] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:18] "GET /openapi/ HTTP/1.1" 200 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:18,156] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:18] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:18,192] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:18] "[36mGET /openapi/static/images/redoc.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:18,194] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:18] "[36mGET /openapi/static/images/rapidoc.svg HTTP/1.1[0m" 304 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 19:58:19,225] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 19:58:19] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\PUC-RIO\Sprint-1\BackEnd\puc-rio-mvp-sprint-1-back-end\venv\Lib\site-packages\werkzeug\_internal.py L224 
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,016] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,117] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,123] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,124] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,218] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:38,232] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 20:59:54,578] WARNING upd_modelo() L321  Erro ao editar a marca com o codigo #3, Existe outro registro com                         o mesmo nome e marca! - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L321 
+[2023-09-04 20:59:54,579] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:54] "[31m[1mPUT /modelo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:38,285] INFO _log() L224   * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,371] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,470] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,477] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,479] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,569] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:00:51,576] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:01:01,303] WARNING upd_modelo() L321  Erro ao editar a marca com o codigo #3, Existe outro registro com                                     o mesmo nome e marca! - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L321 
+[2023-09-04 21:01:01,304] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:01:01] "[31m[1mPUT /modelo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:01:39,768] INFO _log() L224   * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:01:54,782] WARNING upd_modelo() L339  Erro ao editar a marca com o nome  #'ONIX', Não foi possível editar a marca :/<method-wrapper '__str__' of AttributeError object at 0x0000027ED18D10E0> - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L339 
+[2023-09-04 21:01:54,783] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:01:54] "[35m[1mPUT /modelo HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:03:03,212] INFO _log() L224   * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:03:05,947] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:05] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:03:06,041] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:03:06,047] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-04 21:03:06,048] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 

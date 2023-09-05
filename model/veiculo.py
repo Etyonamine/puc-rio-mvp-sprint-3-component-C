@@ -12,7 +12,7 @@ class Veiculo(Base):
                         nullable=False)
 
     ## criar o vinculo com o modelo do veiculo
-    modelo = relationship("Marca", back_populates="veiculos")
+    modelo = relationship("Modelo", back_populates="veiculos")
      
     def __init__(self, placa: str, codigo_modelo: Integer):
         """
