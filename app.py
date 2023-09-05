@@ -180,7 +180,7 @@ def del_marca(form: MarcaBuscaDelSchema):
 
 
 # Consulta de todos as marcas
-@app.get('/marca', tags=[marca_tag],
+@app.get('/marcas', tags=[marca_tag],
          responses={"200": ListaMarcasSchema, "500": ErrorSchema})
 def get_marcas():
     """Consulta as marcas de veículos
@@ -373,12 +373,12 @@ def del_modelo(form: ModeloBuscaDelSchema):
     try:
         # criando conexão com a base
         session = Session()
-
+        
         # validar se está sendo utilizado em algum registro de veiculo  
-        marca_modelo = session.query(Modelo)\
-                             .filter(Modelo.cod_marca == codigo).first()
+        veiculo_modelo = session.query(Veiculo)\
+                             .filter(Veiculo.cod_modelo == codigo).first()
 
-        if marca_modelo:
+        if veiculo_modelo:
             # se há   cadastrado
             error_msg = "Não é possível excluir! O modelo está associado há algum veículo."
             logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
@@ -538,6 +538,27 @@ def add_veiculo(form: VeiculoSchema):
     try:
         # criando conexão com a base
         session = Session()
+
+        # validar se o modelo existe
+        modelo_veiculo = session.query(Modelo)\
+                                .filter(Modelo.cod_modelo == veiculo.cod_modelo).first()
+        if not modelo_veiculo:
+            error_msg = "O modelo informado não existe no cadastro de modelos!"
+            logger.warning(
+                f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa} e modelo {veiculo.cod_modelo}, {error_msg}")
+            return {"message": error_msg}, 404
+
+        # valida se já existe a placa com outro modelo de veiculo
+        veiculo_pesquisado = session.query(Veiculo)\
+                             .filter(Veiculo.des_placa == veiculo.des_placa 
+                                     and Veiculo.cod_modelo != veiculo.codigo_modelo).first()
+        if veiculo_pesquisado:
+             # se foi encontrado retorna sem dar o commit
+            error_msg = "Existe outro modelo com a mesma placa!"
+            logger.warning(
+                f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa}, {error_msg}")
+            return {"message": error_msg}, 400
+
         # adicionando  
         session.add(veiculo)
         # efetivando o comando de adição de novo item na tabela
@@ -576,8 +597,16 @@ def upd_veiculo(form: VeiculoEditSchema):
 
         # criando conexão com a base
         session = Session()
-        # Consulta se ja existe a descricao com outro codigo
+         # validar se o modelo existe
+        modelo_veiculo = session.query(Modelo)\
+                                .filter(Modelo.cod_modelo == codigo_modelo).first()
+        if not modelo_veiculo:
+            error_msg = "O modelo informado não existe no cadastro de modelos!"
+            logger.warning(
+                f"Erro ao adicionar o veiculo com a placa {placa} e modelo {codigo_modelo}, {error_msg}")
+            return {"message": error_msg}, 404
 
+        # Consulta se ja existe a descricao com outro codigo
         veiculo = session.query(Veiculo)\
                              .filter(Veiculo.des_placa ==  placa
                                 and Veiculo.cod_modelo != codigo_modelo
@@ -586,14 +615,16 @@ def upd_veiculo(form: VeiculoEditSchema):
 
         if veiculo:
             # se foi encontrado retorna sem dar o commit
-            error_msg = "Existe outro registro com\
-                         o mesmo nome e marca!"
+            error_msg = "Existe outro veiculo com\
+                         a mesma placa e outro modelo!"
             logger.warning(
                 f"Erro ao editar o veiculo com a placa {placa}, {error_msg}")
             return {"message": error_msg}, 400
         else:            
-            count = session.query(Marca).filter(
-                Marca.cod_veiculo == codigo).update({"des_placa": placa, "cod_modelo":codigo_modelo})
+            count = session.query(Veiculo)\
+                          .filter(Veiculo.cod_veiculo == codigo)\
+                          .update({"des_placa": placa, "cod_modelo":codigo_modelo})
+
             session.commit()
             if count:
                 # retorna sem representação com apenas o codigo http 204
@@ -651,7 +682,7 @@ def del_veiculo(form: VeiculoBuscaDelSchema):
 
 
 # Consulta de todos os modelos
-@app.get('/veiculo', tags=[veiculo_tag],
+@app.get('/veiculos', tags=[veiculo_tag],
          responses={"200": ListaVeiculosSchema, "500": ErrorSchema})
 def get_veiculos():
     """Consulta os modelos de veículos
@@ -669,7 +700,7 @@ def get_veiculos():
             # se não há marcas cadastrados
             return {"veiculos": []}, 200
         else:
-            logger.debug(f"%veículos encontrados" %len(lista))
+            
             # retorna a representação de modelos
             return apresenta_lista_veiculo(lista), 200
     except Exception as e:
@@ -719,11 +750,11 @@ def get_veiculo_id(query: VeiculoBuscaDelSchema):
 
 
 # Consulta por todos os veículos por código de modelo
-@app.get('/modelo_id', tags=[veiculo_tag],
+@app.get('/veiculo_modelo_id', tags=[veiculo_tag],
         responses={"200": ListaVeiculosSchema, 
                    "404": ErrorSchema,
                    "500": ErrorSchema})
-def get_lista_veiculos_por_id_marca(query: VeiculoBuscaPorModelo):
+def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
     """ Consulta de veiculos pelo codigo do modelo
 
         Retorna uma representação de  veículo
@@ -737,15 +768,13 @@ def get_lista_veiculos_por_id_marca(query: VeiculoBuscaPorModelo):
         # criando conexão com a base
         session = Session()
         # fazendo a busca
-        lista = session.query(Veiculo)\
-                             .filter(Veiculo.cod_modelo == codigo_modelo).first()
+        lista = session.query(Veiculo).filter(Veiculo.cod_modelo == codigo_modelo)
 
         if not lista:
             # se não há marcas cadastrados
-            return {"veiculos": []}, 200
-        else:
-            logger.debug(f"%veículos encontrados" %
-                         len(lista))
+            return {"message": error_msg}, 404
+
+        else:            
             # retorna a representação de modelos
             return apresenta_lista_veiculo(lista), 200
     except Exception as e:

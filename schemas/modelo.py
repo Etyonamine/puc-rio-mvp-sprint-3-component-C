@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from model.modelo import Modelo
-from model.marca import Marca
 from typing import List
 from model import Base
 
+from schemas import MarcaViewSchema
 
 class ModeloSchema(BaseModel):
     """Define como um novo registro de modelo de veículo será inserido """    
@@ -15,15 +15,14 @@ class ModeloViewSchema(BaseModel):
     """
     codigo: int = 1
     nome: str = "GM"  
-    codigo_marca = int = 1  
-
+    codigo_marca = int = 1 
+    marca: MarcaViewSchema  
 
 class ModeloEditSchema(BaseModel):
     """Define como será recebido os dados para a edição """
     codigo: int = 1
     nome: str = 'GM-EUA'  
     marca_id: int = 44  
-
 
 class ModeloBuscaDelSchema(BaseModel):
     """ Define como a estrutura que representa a busca de delete.Que será
@@ -38,6 +37,7 @@ class ListaModelosSchema(BaseModel):
     """
     modelos: List[ModeloViewSchema]
 
+
 class ModeloBuscaPorMarcaSchema(BaseModel):
     """ Define como a estrutura que representa a busca de modelos 
         que possuam o codigo da marca.
@@ -45,16 +45,17 @@ class ModeloBuscaPorMarcaSchema(BaseModel):
     """
     codigo_marca: int = 1
 
+
 def apresenta_modelo(modelo: Modelo):
     """ Retorna uma representação de um modelo de veiculo seguindo o schema definido em
-        MarcaViewSchema.
+        ModeloViewSchema.
     """
     return {
         "codigo": modelo.cod_modelo,
         "nome": modelo.nom_modelo,
-        "codigo_marca": modelo.cod_marca
+        "codigo_marca": modelo.cod_marca,
+        "marca": [{"codigo": modelo.marca.cod_marca,"nome": modelo.marca.nom_marca}]
     }
-
 
 
 def apresenta_lista_modelo(lista: List[Modelo]):
@@ -68,7 +69,8 @@ def apresenta_lista_modelo(lista: List[Modelo]):
         result.append({
             "codigo": item.cod_modelo,
             "nome": item.nom_modelo,
-            "codigo_marca": item.cod_marca
+            "codigo_marca": item.cod_marca,
+            "marca": [{"codigo": item.marca.cod_marca,"nome": item.marca.nom_marca}]
         })
 
     return {"lista": result}    

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import Optional, List
 from model import Base
 from model.marca import Marca
 
@@ -12,7 +12,8 @@ class MarcaViewSchema(BaseModel):
     """ Define como uma marca de veículo deverá retornado: marca
     """
     codigo: int = 1
-    nome: str = "GM"   
+    nome: str = "GM"
+    
 
 
 class MarcaEditSchema(BaseModel):
@@ -41,7 +42,8 @@ def apresenta_marca(marca: Marca):
     """
     return {
         "codigo": marca.cod_marca,
-        "nome": marca.nom_marca
+        "nome": marca.nom_marca,
+        "modelos": [{"codigo": c.cod_modelo, "nome": c.nom_modelo} for c in marca.modelos]
     }
 
 
