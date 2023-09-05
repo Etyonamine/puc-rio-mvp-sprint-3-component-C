@@ -51,7 +51,7 @@ def home():
 def add_marca(form: MarcaSchema):
     """ Adicionar a marca de veículo """
     marca = Marca(      
-      des_nome = form.nome
+      nome = form.nome
     )
 
     logger.debug(f"Adicionando a marca de veículo com o nome '{marca.nom_marca}'")
@@ -63,8 +63,7 @@ def add_marca(form: MarcaSchema):
         session.add(marca)
         # efetivando o comando de adição de novo item na tabela
         session.commit()
-        logger.debug(
-            f"Adicionado a marca do veículo com o nome: '{marca.nom_marca}'")
+        logger.debug(f"Adicionado a marca do veículo com o nome: '{marca.nom_marca}'")
         return apresenta_marca(marca), 200
 
     except IntegrityError as e:
@@ -113,7 +112,7 @@ def upd_marca(form: MarcaEditSchema):
             return {"message": error_msg}, 400
         else:            
             count = session.query(Marca).filter(
-                Marca.cod_marca == id).update({"nom_marca": nome_marca})
+                Marca.cod_marca == codigo_marca).update({"nom_marca": nome_marca})
             session.commit()
             if count:
                 # retorna sem representação com apenas o codigo http 204
@@ -249,22 +248,32 @@ def get_marca_id(query: MarcaBuscaDelSchema):
                      "500": ErrorSchema})
 def add_modelo(form: ModeloSchema):
     """ Adicionar o modelo de veículo """
-    modelo = Modelo(
-      cod_modelo = form.codigo,
-      nom_modelo = form.nome
+    modelo = Modelo(      
+      nome = form.nome,
+      codigo_marca = form.codigo_marca
     )
 
     logger.debug(f"Adicionando o modelo da marca de veículo com o nome '{modelo.nom_modelo}'")
     try:
         # criando conexão com a base
         session = Session()
-        # adicionando  
-        session.add(modelo)
-        # efetivando o comando de adição de novo item na tabela
-        session.commit()
-        logger.debug(
-            f"Adicionado a marca do veículo com o nome: '{modelo.nom_modelo}'")
-        return apresenta_modelo(modelo), 200
+        # verifica se o codigo de marca foi encontrado         
+        marca = session.query(Marca)\
+                             .filter(Marca.cod_marca == modelo.cod_marca).first()
+
+        if not marca:
+            # se não há   cadastrado
+            error_msg = "Marca não encontrado na base :/"
+            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
+            return {"message": error_msg}, 404
+        else:            
+            # adicionando  
+            session.add(modelo)
+            # efetivando o comando de adição de novo item na tabela
+            session.commit()
+            logger.debug(
+                f"Adicionado a marca do veículo com o nome: '{modelo.nom_modelo}'")
+            return apresenta_modelo(modelo), 200
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
@@ -286,7 +295,7 @@ def add_modelo(form: ModeloSchema):
                     "404": ErrorSchema,
                     "500": ErrorSchema})
 def upd_modelo(form: ModeloEditSchema):
-    """Editar um modelo de veiculojá cadastrado na base """
+    """Editar um modelo de veiculo já cadastrado na base """
     codigo_modelo = form.codigo
     nome_modelo = form.nome
     codigo_marca = form.marca_id
@@ -296,35 +305,44 @@ def upd_modelo(form: ModeloEditSchema):
 
         # criando conexão com a base
         session = Session()
-        # Consulta se ja existe a descricao com outro codigo
 
+  # verifica se o codigo de marca foi encontrado         
+        marca = session.query(Marca)\
+                             .filter(Marca.cod_marca == codigo_marca).first()
 
-        modelo = session.query(Modelo)\
-                             .filter(Modelo.nom_marca ==  nome_modelo
-                                and Modelo.cod_modelo != codigo_modelo
-                                and Modelo.cod_marca == codigo_marca
-                             ).first()
+        if not marca:
+            # se não há   cadastrado
+            error_msg = "Marca não encontrado na base :/"
+            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
+            return {"message": error_msg}, 404
+        else:      
 
-        if modelo:
-            # se foi encontrado retorna sem dar o commit
-            error_msg = "Existe outro registro com\
-                         o mesmo nome e marca!"
-            logger.warning(
-                f"Erro ao editar a marca com o codigo #{codigo_modelo}, {error_msg}")
-            return {"message": error_msg}, 400
-        else:            
-            count = session.query(Marca).filter(
-                Marca.cod_modelo == codigo_modelo).update({"nom_modelo": nome_modelo, "cod_marca": codigo_marca})
-            session.commit()
-            if count:
-                # retorna sem representação com apenas o codigo http 204
-                logger.debug(f"Editado a marca {nome_modelo}")
-                return '', 204
-            else:
-                error_msg = f"A marca com o nome {nome_modelo} não foi encontrado na base"
+            # Consulta se ja existe a descricao com outro codigo        
+            modelo = session.query(Modelo)\
+                                .filter(Modelo.nom_modelo ==  nome_modelo
+                                    and Modelo.cod_modelo != codigo_modelo
+                                    and Modelo.cod_marca == codigo_marca
+                                ).first()
+
+            if modelo:
+                # se foi encontrado retorna sem dar o commit
+                error_msg = "Existe outro registro com o mesmo nome e marca!"
                 logger.warning(
-                    f"Erro ao editar a marca '{nome_modelo}', {error_msg}")
-                return '', 404
+                    f"Erro ao editar a marca com o codigo #{codigo_modelo}, {error_msg}")
+                return {"message": error_msg}, 400
+            else:            
+                count = session.query(Modelo).filter(
+                    Modelo.cod_modelo == codigo_modelo).update({"nom_modelo": nome_modelo, "cod_marca": codigo_marca})
+                session.commit()
+                if count:
+                    # retorna sem representação com apenas o codigo http 204
+                    logger.debug(f"Editado a marca {nome_modelo}")
+                    return '', 204
+                else:
+                    error_msg = f"A marca com o nome {nome_modelo} não foi encontrado na base"
+                    logger.warning(
+                        f"Erro ao editar a marca '{nome_modelo}', {error_msg}")
+                    return '', 404
     except Exception as e:
         # caso um erro fora do previsto
         error_msg = f"Não foi possível editar a marca :/{e.__str__}"
