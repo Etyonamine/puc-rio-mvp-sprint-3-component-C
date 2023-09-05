@@ -144,7 +144,16 @@ def del_marca(form: MarcaBuscaDelSchema):
     try:
         # criando conexão com a base
         session = Session()
-        
+        # validar se está sendo utilizado no modelo  
+        marca_modelo = session.query(Modelo)\
+                             .filter(Modelo.cod_marca == codigo).first()
+
+        if marca_modelo:
+            # se há   cadastrado
+            error_msg = "Não é possível excluir! A Marca está associado há algum modelo."
+            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
+            return {"message": error_msg}, 400               
+
         # fazendo a remoção
         count = session.query(Marca).filter(
             Marca.cod_marca == codigo).delete()
@@ -364,6 +373,17 @@ def del_modelo(form: ModeloBuscaDelSchema):
     try:
         # criando conexão com a base
         session = Session()
+
+        # validar se está sendo utilizado em algum registro de veiculo  
+        marca_modelo = session.query(Modelo)\
+                             .filter(Modelo.cod_marca == codigo).first()
+
+        if marca_modelo:
+            # se há   cadastrado
+            error_msg = "Não é possível excluir! O modelo está associado há algum veículo."
+            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
+            return {"message": error_msg}, 400     
+
         # fazendo a remoção
         count = session.query(Modelo).filter(
             Modelo.cod_modelo == codigo).delete()
@@ -511,7 +531,7 @@ def add_veiculo(form: VeiculoSchema):
     """ Adicionar o veículo """
     veiculo = Veiculo(
       placa = form.placa,
-      codigo_modelo= form.modelo_id
+      codigo_modelo= form.codigo_modelo
     )
 
     logger.debug(f"Adicionando o veículo com a placa '{veiculo.des_placa}'")
@@ -649,8 +669,7 @@ def get_veiculos():
             # se não há marcas cadastrados
             return {"veiculos": []}, 200
         else:
-            logger.debug(f"%veículos encontrados" %
-                         len(lista))
+            logger.debug(f"%veículos encontrados" %len(lista))
             # retorna a representação de modelos
             return apresenta_lista_veiculo(lista), 200
     except Exception as e:

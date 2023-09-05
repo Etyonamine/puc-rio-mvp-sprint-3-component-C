@@ -7,7 +7,7 @@ from model import Base
 class VeiculoSchema(BaseModel):
     """Define como um novo veiculo deve ser inserido """    
     placa: str = "ABC-1234"
-    modelo_id: int = 1    
+    codigo_modelo: int = 1
    
 class VeiculoViewSchema(BaseModel):
     """ Define como uma veículo deverá retornado: modelo
