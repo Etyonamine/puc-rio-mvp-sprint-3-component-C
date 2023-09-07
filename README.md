@@ -68,13 +68,13 @@ Navegue até o diretório que contém o Dockerfile e o requirements.txt no termi
 Execute **como administrador** o seguinte comando que encontra-se entre as aspas duplas para construir a imagem Docker:
 
 ```
-$ "docker build -t componente-d ."
+$ "docker build -t componente-c ."
 ```
 
 Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
 
 ```
-$ docker run -p 5000:5000 componente-d
+$ docker run -p 5000:5000 componente-c
 ```
 
 Uma vez executando, para acessar a API, basta abrir o [http://localhost:5000/#/](http://localhost:5000/#/) no navegador.
