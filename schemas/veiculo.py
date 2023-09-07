@@ -56,14 +56,18 @@ def apresenta_veiculo(veiculo: Veiculo):
        VeiculoViewSchema.
     """
     return {
-        "codigo": veiculo.cod_veiculo,
-        "nome": veiculo.des_placa,
-        "codigo_modelo": veiculo.cod_modelo,
-        "modelo": [{"codigo": veiculo.modelo.cod_modelo, 
-                    "nome":  veiculo.modelo.nom_modelo,
-                    "codigo_marca": veiculo.modelo.cod_marca,
-                     "marca": [{"codigo": veiculo.modelo.marca.cod_marca,"nome": veiculo.modelo.marca.nom_marca}]
-                  }]
+        "veiculo":
+        {
+            "codigo": veiculo.cod_veiculo,
+            "nome": veiculo.des_placa,
+            "codigo_modelo": veiculo.cod_modelo,
+            "modelo": [{"codigo": veiculo.modelo.cod_modelo, 
+                        "nome":  veiculo.modelo.nom_modelo,
+                        "codigo_marca": veiculo.modelo.cod_marca,
+                        "marca": [{"codigo": veiculo.modelo.marca.cod_marca,"nome": veiculo.modelo.marca.nom_marca}]
+                    }
+            ]
+        }
     }
 
 

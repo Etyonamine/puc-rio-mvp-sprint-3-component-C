@@ -10,6 +10,8 @@ from logger import logger
 from schemas import *
 from flask_cors import CORS
 
+import json, requests
+
 
 info = Info(title="Minha API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
@@ -41,7 +43,6 @@ def home():
     return redirect('/openapi')
 
 
-
 # ***************************************************  Metodos do marca do veiculo ***************************************
 # Novo registro na tabela marca do veiculo
 @app.post('/marca', tags=[marca_tag],
@@ -68,14 +69,14 @@ def add_marca(form: MarcaSchema):
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
-        error_msg = "A marca de veículo com o mesmo nome já foi salvo anteriormente na base :/"
+        error_msg = f"A marca de veículo com o mesmo nome já foi salvo anteriormente na base :/{e}"
         logger.warning(
             f"Erro ao adicionar a marca do veículo com nome ={marca.nom_marca}', {error_msg}")
         return {"message": error_msg}, 409
 
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = "Não foi possível salvar novo item :/"
+        error_msg = f"Não foi possível salvar novo item :/{e}"
         logger.warning(f"Erro ao adicionar uma nova marca de veículo, {error_msg}")
         return {"message": error_msg}, 400
 
@@ -172,7 +173,7 @@ def del_marca(form: MarcaBuscaDelSchema):
             return '', 404
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = "Não foi possível excluir marca do veiculo :/"
+        error_msg = f"Não foi possível excluir marca do veiculo :/{e}"
         logger.warning(
             f"Erro ao excluir a marca do veiculo com\
             o codigo #'{codigo}', {error_msg}")
@@ -233,8 +234,8 @@ def get_marca_id(query: MarcaBuscaDelSchema):
 
         if not marca:
             # se não há   cadastrado
-            error_msg = "Marca não encontrado na base :/"
-            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
+            error_msg_nao_encontrado = "Marca não encontrado na base :/"
+            logger.warning(f"Erro ao buscar a marca de veículo , {error_msg_nao_encontrado}")
             return {"message": error_msg}, 404
         else:
             logger.debug(
@@ -286,7 +287,7 @@ def add_modelo(form: ModeloSchema):
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
-        error_msg = "O modelo da marca de veículo com o mesmo nome já foi salvo anteriormente na base :/"
+        error_msg = f"O modelo da marca de veículo com o mesmo nome já foi salvo anteriormente na base :/{e}"
         logger.warning(
             f"Erro ao adicionar o modelo da marca do veículo com o nome ={modelo.nom_modelo}', {error_msg}")
         return {"message": error_msg}, 409
@@ -321,7 +322,7 @@ def upd_modelo(form: ModeloEditSchema):
 
         if not marca:
             # se não há   cadastrado
-            error_msg = "Marca não encontrado na base :/"
+            error_msg = "Marca não encontrado na base"
             logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
             return {"message": error_msg}, 404
         else:      
@@ -402,7 +403,7 @@ def del_modelo(form: ModeloBuscaDelSchema):
             return '', 404
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = "Não foi possível excluir o modelo do veiculo :/"
+        error_msg = f"Não foi possível excluir o modelo do veiculo :/{e}"
         logger.warning(
             f"Erro ao excluir o modelo do veiculo com\
             o codigo #'{codigo}', {error_msg}")
@@ -569,7 +570,7 @@ def add_veiculo(form: VeiculoSchema):
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
-        error_msg = "O veículo com o mesmo placa e modelo já foi salvo anteriormente na base :/"
+        error_msg = f"O veículo com o mesmo placa e modelo já foi salvo anteriormente na base :/{e}"
         logger.warning(
             f"Erro ao adicionar o veículo com a placa = {veiculo.placa}', {error_msg}")
         return {"message": error_msg}, 409
@@ -654,8 +655,21 @@ def del_veiculo(form: VeiculoBuscaDelSchema):
     codigo = form.codigo
     logger.debug(f"Excluindo o veiculo do código #{codigo}")
     try:
+        # validar na api operacao se pode ser excluido o registro       
+        
+        if existe_operacao(codigo):            
+            error_msg = "O veículo foi encontrado em um ou mais\
+                registros da Operação"
+
+            logger.warning(
+                f"Erro ao excluir o modelo de veiculo \
+                 codigo #'{codigo}', {error_msg}")
+
+            return '', 400   
+
         # criando conexão com a base
         session = Session()
+
         # fazendo a remoção
         count = session.query(Veiculo).filter(
             Veiculo.cod_veiculo == codigo).delete()
@@ -674,7 +688,7 @@ def del_veiculo(form: VeiculoBuscaDelSchema):
             return '', 404
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = "Não foi possível excluir o veiculo :/"
+        error_msg = f"Não foi possível excluir o veiculo :/{e}"
         logger.warning(
             f"Erro ao excluir o veiculo com\
             o codigo #'{codigo}', {error_msg}")
@@ -730,12 +744,12 @@ def get_veiculo_id(query: VeiculoBuscaDelSchema):
         # fazendo a busca
         veiculo = session.query(Veiculo)\
                              .filter(Veiculo.cod_veiculo == codigo).first()
-
+        
         if not veiculo:
             # se não há registro cadastrado
             error_msg = "Veiculo não encontrado na base :/"
             logger.warning(f"Erro ao buscar o modelo de veículo , {error_msg}")
-            return {"message": error_msg}, 404
+            return '', 404
         else:
             logger.debug(
                 f"Modelo do veículo #{codigo} encontrado")
@@ -783,3 +797,15 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
         logger.warning(
             f"Erro ao consultar os veículos, {error_msg}")
         return {"message": error_msg}, 500
+
+""" Metodos privados 
+
+"""
+# Consulta a API de operação   
+def existe_operacao(codigo_veiculo: int):
+        response = requests.get(f"http://127.0.0.1:5001/operacao_veiculo_id?codigo_veiculo={codigo_veiculo}")
+
+        # realiza a conversão do response para um formato acessível ao python
+        json_data = json.loads(response.text)
+
+        return bool(json_data["lista"])

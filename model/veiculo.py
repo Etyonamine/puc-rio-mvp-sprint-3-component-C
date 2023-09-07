@@ -2,7 +2,6 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from model import Base
 from sqlalchemy.orm import relationship
 
-
 class Veiculo(Base):
     __tablename__ = 'veiculo'
     cod_veiculo = Column("pk_veiculo", Integer, primary_key=True)
@@ -13,7 +12,8 @@ class Veiculo(Base):
 
     ## criar o vinculo com o modelo do veiculo
     modelo = relationship("Modelo", back_populates="veiculos")
-     
+         
+        
     def __init__(self, placa: str, codigo_modelo: Integer):
         """
         Cria uma modelo de veiculo de marca especifica
@@ -24,3 +24,7 @@ class Veiculo(Base):
         """
         self.des_placa = placa
         self.cod_modelo = codigo_modelo
+
+
+
+    

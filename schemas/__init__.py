@@ -8,3 +8,4 @@ from schemas.modelo import ModeloSchema,ModeloEditSchema,ModeloBuscaDelSchema, M
 
 from schemas.veiculo import VeiculoSchema,VeiculoViewSchema,VeiculoEditSchema,VeiculoBuscaDelSchema,\
                             ListaVeiculosSchema,apresenta_lista_veiculo,apresenta_veiculo, VeiculoBuscaPorModelo
+                            

@@ -15,7 +15,8 @@ class Modelo(Base):
     marca = relationship("Marca", back_populates="modelos")
     veiculos = relationship("Veiculo", back_populates="modelo")
 
-    def __init__(self, nome: str, codigo_marca: Integer):
+    def __init__(self, nome: str, 
+                       codigo_marca: int):
         """
         Cria uma modelo de veiculo de marca especifica
 
