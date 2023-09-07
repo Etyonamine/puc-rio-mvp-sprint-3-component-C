@@ -1,71 +1,50 @@
-[2023-09-04 20:33:24,349] ERROR log_exception() L1449 Exception on /modelo [POST] - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-           ^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py", line 251, in add_modelo
-    modelo = Modelo(
-       ^^^^^^^^^^^^^
-TypeError: __init__() got an unexpected keyword argument 'cod_marca'
-[2023-09-04 20:33:24,358] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:33:24] "[35m[1mPOST /modelo HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:52,493] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 12:36:50,783] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:36:50] "[35m[1mDELETE /veiculo HTTP/1.1[0m" 204 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:36:56,194] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:36:56] "GET /veiculos HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:45,854] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,411] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,508] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,512] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,513] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,621] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:55,627] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:55] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:35:59,296] WARNING add_modelo() L267  Erro ao buscar a marca de veículo , Marca não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L267 
-[2023-09-04 20:35:59,296] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:35:59] "[33mPOST /modelo HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:36:09,027] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:36:09] "POST /modelo HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:36:31,219] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:36:31] "POST /modelo HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:36:43,104] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:36:43] "POST /marca HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:36:45,750] WARNING add_marca() L72   Erro ao adicionar a marca do veículo com nome =GM', A marca de veículo com o mesmo nome já foi salvo anteriormente na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L72  
-[2023-09-04 20:36:45,751] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:36:45] "[31m[1mPOST /marca HTTP/1.1[0m" 409 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:36:58,741] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:36:58] "GET /marca HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:37:13,271] WARNING get_modelos() L409  Erro ao consultar os modelos dos veículos, Não foi possível consultar os modelos :/'Modelo' object has no attribute 'nom_marca' - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L409 
-[2023-09-04 20:37:13,272] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:37:13] "[35m[1mGET /modelos HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:41:05,386] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 12:38:51,345] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:51,450] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:51,456] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:51,458] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:51,568] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:38:51,571] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:38:51] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:39:11,296] WARNING del_veiculo() L664  Erro ao excluir o modelo de veiculo                  codigo #'1', O veículo foi encontrado em um ou mais                registros da Operação - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L664 
+[2023-09-07 12:39:11,297] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:39:11] "[31m[1mDELETE /veiculo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:39:38,983] WARNING del_veiculo() L664  Erro ao excluir o modelo de veiculo                  codigo #'13', O veículo foi encontrado em um ou mais                registros da Operação - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L664 
+[2023-09-07 12:39:38,983] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:39:38] "[31m[1mDELETE /veiculo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:04,991] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:41:11,322] WARNING get_modelos() L409  Erro ao consultar os modelos dos veículos, Não foi possível consultar os modelos :/'Modelo' object has no attribute 'nom_marca' - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L409 
-[2023-09-04 20:41:11,323] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:41:11] "[35m[1mGET /modelos HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:42:26,560] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 12:47:14,017] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:14,122] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:14,127] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:14,128] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:14,234] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:14,237] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:14] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:47:16,830] WARNING del_veiculo() L685  Erro ao excluir o modelo de veiculo                  codigo #'1', O veículo não foi encontrado na base - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L685 
+[2023-09-07 12:47:16,831] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:47:16] "[33mDELETE /veiculo HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:13,212] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:42:29,681] WARNING get_modelos() L409  Erro ao consultar os modelos dos veículos, Não foi possível consultar os modelos :/'Modelo' object has no attribute 'nom_marca' - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L409 
-[2023-09-04 20:42:29,682] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:42:29] "[35m[1mGET /modelos HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:55:59,692] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 12:48:18,181] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:18,296] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:18,300] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:18,301] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:18,372] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:18,374] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:18] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:48:20,765] WARNING del_veiculo() L685  Erro ao excluir o modelo de veiculo                  codigo #'1', O veículo não foi encontrado na base - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L685 
+[2023-09-07 12:48:20,766] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:48:20] "[33mDELETE /veiculo HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:09,101] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:56:09,252] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:56:09] "GET /modelos HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:56:47,011] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:56:47] "POST /modelo HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:56:51,536] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:56:51] "GET /modelos HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:32,673] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:32,784] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:32,787] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:32,790] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,428] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,528] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,539] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,540] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,595] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:12,598] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:12] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 

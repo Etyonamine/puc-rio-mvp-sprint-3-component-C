@@ -1,53 +1,52 @@
-[2023-09-04 20:57:32,896] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:32,900] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:32] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:43,735] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 12:49:15,937] WARNING del_veiculo() L664  Erro ao excluir o modelo de veiculo                  codigo #'1', O veículo foi encontrado em um ou mais                registros da Operação - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L664 
+[2023-09-07 12:49:15,943] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:15] "[31m[1mDELETE /veiculo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:49:36,564] WARNING del_veiculo() L685  Erro ao excluir o modelo de veiculo                  codigo #'123', O veículo não foi encontrado na base - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L685 
+[2023-09-07 12:49:36,564] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:49:36] "[33mDELETE /veiculo HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:51:04,905] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 12:51:04,906] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:51:04] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 12:59:24,329] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 12:59:24,330] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 12:59:24] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:00:20,715] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:00:20,716] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:00:20] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:00:26,789] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:00:26] "GET /veiculo_id?codigo=5 HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:00:57,952] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:00:57,953] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:00:57] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:03:24,371] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:03:24,372] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:03:24] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:04:09,707] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:04:09] "GET /veiculo_id?codigo=5 HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:04:12,881] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:04:12,882] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:04:12] "[33mGET /veiculo_id?codigo=4 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:04:16,591] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:04:16] "GET /veiculo_id?codigo=5 HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:04:22,153] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:04:22] "GET /veiculo_id?codigo=5 HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:05:25,909] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:05:25,910] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:05:25] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:07:54,624] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:46,855] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:46,954] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:46,963] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:46,964] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:46] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:47,041] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:47] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:57:47,046] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:57:47] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:58:02,546] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:58:02] "GET /modelos HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:58:18,320] WARNING upd_modelo() L340  Erro ao editar a marca com o nome  #'PULSE', Não foi possível editar a marca :/<method-wrapper '__str__' of AttributeError object at 0x000001ECEE2C9930> - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L340 
-[2023-09-04 20:58:18,321] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:58:18] "[35m[1mPUT /modelo HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:32,720] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 13:08:09,680] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:08:09] "GET /veiculo_id?codigo=5 HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:08:16,900] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:08:16,901] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:08:16] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:09:16,458] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,016] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,117] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,123] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,124] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,218] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:38,232] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:38] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 20:59:54,578] WARNING upd_modelo() L321  Erro ao editar a marca com o codigo #3, Existe outro registro com                         o mesmo nome e marca! - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L321 
-[2023-09-04 20:59:54,579] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 20:59:54] "[31m[1mPUT /modelo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:38,285] INFO _log() L224   * Running on all addresses (0.0.0.0)
+[2023-09-07 13:09:19,359] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:09:19,360] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:09:19] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:09:37,044] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:09:37,045] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:09:37] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 13:14:04,947] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 13:14:04,948] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 13:14:04] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:26:17,477] INFO _log() L224   * Running on all addresses (0.0.0.0)
    WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
- * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,371] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,470] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,477] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,479] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,569] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:00:51,576] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:00:51] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:01:01,303] WARNING upd_modelo() L321  Erro ao editar a marca com o codigo #3, Existe outro registro com                                     o mesmo nome e marca! - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L321 
-[2023-09-04 21:01:01,304] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:01:01] "[31m[1mPUT /modelo HTTP/1.1[0m" 400 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:01:39,768] INFO _log() L224   * Running on all addresses (0.0.0.0)
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on http://127.0.0.1:5000
- * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:01:54,782] WARNING upd_modelo() L339  Erro ao editar a marca com o nome  #'ONIX', Não foi possível editar a marca :/<method-wrapper '__str__' of AttributeError object at 0x0000027ED18D10E0> - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L339 
-[2023-09-04 21:01:54,783] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:01:54] "[35m[1mPUT /modelo HTTP/1.1[0m" 500 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:03:03,212] INFO _log() L224   * Running on all addresses (0.0.0.0)
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on http://127.0.0.1:5000
- * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:03:05,947] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:05] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:03:06,041] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:03:06,047] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
-[2023-09-04 21:03:06,048] INFO _log() L224  127.0.0.1 - - [04/Sep/2023 21:03:06] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\vm\Lib\site-packages\werkzeug\_internal.py L224 
+ * Running on http://192.168.15.138:5000 (Press CTRL+C to quit) - call_trace=C:\Users\edumi\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:26:22,573] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 14:26:22,574] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 14:26:22] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\Users\edumi\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:27:55,568] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 14:27:55,569] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 14:27:55] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\Users\edumi\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:28:10,518] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 14:28:10,519] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 14:28:10] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\Users\edumi\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:30:28,427] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
+[2023-09-07 14:30:28,427] INFO _log() L224  127.0.0.1 - - [07/Sep/2023 14:30:28] "[33mGET /veiculo_id?codigo=1 HTTP/1.1[0m" 404 - - call_trace=C:\Users\edumi\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-07 14:31:08,753] WARNING get_veiculo_id() L751  Erro ao buscar o modelo de veículo , Veiculo não encontrado na base :/ - call_trace=C:\mvp\puc-rio-mvp-sprint-3-component-C-2\app.py L751 
