@@ -12,11 +12,14 @@ class ModeloSchema(BaseModel):
 
 class ModeloViewSchema(BaseModel):
     """ Define como uma modelo de veículo deverá retornado: modelo
+    
     """
+
     codigo: int = 1
     nome: str = "GM"  
     codigo_marca = int = 1 
     marca: MarcaViewSchema  
+    nome_marca: str = 'GMW'
 
 class ModeloEditSchema(BaseModel):
     """Define como será recebido os dados para a edição """
@@ -54,7 +57,8 @@ def apresenta_modelo(modelo: Modelo):
         "codigo": modelo.cod_modelo,
         "nome": modelo.nom_modelo,
         "codigo_marca": modelo.cod_marca,
-        "marca": [{"codigo": modelo.marca.cod_marca,"nome": modelo.marca.nom_marca}]
+        "marca": [{"codigo": modelo.marca.cod_marca,"nome": modelo.marca.nom_marca}],
+        "nome_marca": modelo.marca.nom_marca
     }
 
 
@@ -70,7 +74,8 @@ def apresenta_lista_modelo(lista: List[Modelo]):
             "codigo": item.cod_modelo,
             "nome": item.nom_modelo,
             "codigo_marca": item.cod_marca,
-            "marca": [{"codigo": item.marca.cod_marca,"nome": item.marca.nom_marca}]
+            "marca": [{"codigo": item.marca.cod_marca,"nome": item.marca.nom_marca}], 
+            "nome_marca": item.marca.nom_marca
         })
 
     return {"lista": result}    

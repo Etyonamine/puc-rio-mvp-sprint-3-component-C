@@ -10,7 +10,8 @@ from logger import logger
 from schemas import *
 from flask_cors import CORS
 
-import json, requests
+import json
+import pip._vendor.requests 
 
 
 info = Info(title="Minha API", version="1.0.0")
@@ -803,7 +804,7 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
 """
 # Consulta a API de operação   
 def existe_operacao(codigo_veiculo: int):
-        response = requests.get(f"http://127.0.0.1:5001/operacao_veiculo_id?codigo_veiculo={codigo_veiculo}")
+        response =  pip._vendor.requests.get(f"http://127.0.0.1:5001/operacao_veiculo_id?codigo_veiculo={codigo_veiculo}")
 
         # realiza a conversão do response para um formato acessível ao python
         json_data = json.loads(response.text)
