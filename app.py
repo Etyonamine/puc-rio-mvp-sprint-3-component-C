@@ -664,19 +664,8 @@ def del_veiculo(form: VeiculoBuscaDelSchema):
     """
     codigo = form.codigo
     logger.debug(f"Excluindo o veiculo do código #{codigo}")
-    try:
-        # validar na api operacao se pode ser excluido o registro       
-        
-        if existe_operacao(codigo):            
-            error_msg = "O veículo foi encontrado em um ou mais\
-                registros da Operação"
-
-            logger.warning(
-                f"Erro ao excluir o modelo de veiculo \
-                 codigo #'{codigo}', {error_msg}")
-
-            return '', 400   
-
+    try:      
+    
         # criando conexão com a base
         session = Session()
 
