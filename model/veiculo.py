@@ -9,10 +9,14 @@ class Veiculo(Base):
     cod_modelo = Column(Integer,
                          ForeignKey("modelo.pk_modelo"),
                         nullable=False)
+    id_cor = Column(Integer, 
+            ForeignKey("cores.id_cor"),
+                        nullable=False
+    )
 
     ## criar o vinculo com o modelo do veiculo
     modelo = relationship("Modelo", back_populates="veiculos")
-         
+    cor = relationship("Cores", back_populates = "veiculos")
         
     def __init__(self, placa: str, codigo_modelo: Integer):
         """

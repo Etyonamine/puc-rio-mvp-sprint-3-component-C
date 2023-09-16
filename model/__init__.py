@@ -7,6 +7,7 @@ import os
 from model.base import Base
 from model.marca import Marca
 from model.modelo import Modelo
+from model.cores import Cores
 from model.veiculo import Veiculo
 
 

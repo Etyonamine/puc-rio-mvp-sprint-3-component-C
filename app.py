@@ -5,7 +5,7 @@ from urllib.parse import unquote
 
 from sqlalchemy.exc import IntegrityError
 
-from model import Session, Marca, Modelo, Veiculo
+from model import Session, Marca, Modelo, Veiculo, Cores
 from logger import logger
 from schemas import *
 from flask_cors import CORS
@@ -34,6 +34,11 @@ modelo_tag = Tag(
 veiculo_tag = Tag(
     name="Veiculo", description="Adição, visualização,\
                                     edição e remoção de modelos de veiculos da base")
+
+cores_tag = Tag(
+    name="Cor", 
+    description='Adição, visualização,edição e remoção de cores de veiculos da base'
+)
 
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 @app.get('/', tags=[home_tag])
@@ -798,6 +803,76 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
         logger.warning(
             f"Erro ao consultar os veículos, {error_msg}")
         return {"message": error_msg}, 500
+
+
+# ***************************************************  Metodos do cores do veiculo ***************************************
+# Consulta de todas cores
+@app.get('/cores', tags=[cores_tag],
+         responses={"200": ListaCoresSchema, "500": ErrorSchema})
+def get_cores():
+    """Consulta as cores de veículos
+
+    Retorna uma listagem de representações dos cores encontrados.
+    """
+    logger.debug(f"Consultando as cores de veículos ")
+    try:
+        # criando conexão com a base
+        session = Session()
+        # fazendo a busca
+        lista = session.query(Cores).all()
+
+        if not lista:
+            # se não há marcas cadastrados
+            return {"cores": []}, 200
+        else:            
+            # retorna a representação de modelos
+            return apresenta_lista_cores(lista), 200
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = f"Não foi possível consultar as cores :/{str(e)}"
+        logger.warning(
+            f"Erro ao consultar as cores, {error_msg}")
+        return {"message": error_msg}, 500
+
+
+# Consulta de cor por ID
+@app.get('/cor_id', tags=[cores_tag],
+         responses={"200": CorViewSchema, "404": ErrorSchema,
+                    "500": ErrorSchema})
+def get_cor_id(query: CorBuscaSchema):
+    """Consulta um veiculo pelo codigo
+
+    Retorna uma representação de uma cor de veículo
+    """
+
+    codigo = query.codigo
+
+    logger.debug( f"Consultando um cor de veiculo por codigo = #{codigo} ")
+    try:
+        # criando conexão com a base
+        session = Session()
+        # fazendo a busca
+        cor = session.query(Cores)\
+                             .filter(Cores.codigo == codigo).first()
+        
+        if not cor:
+            # se não há registro cadastrado
+            error_msg = "Cor não encontrado na base :/"
+            logger.warning(f"Erro ao buscar a cor de veículo , {error_msg}")
+            return '', 404
+        else:
+            logger.debug(
+                f"Cor de veículo #{codigo} encontrado")
+            # retorna a representação de  s
+            return apresenta_cor(cor), 200
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = f"Não foi possível consultar a cor de veículos :/{str(e)}"
+        logger.warning(
+            f"Erro ao consultar a cor de veículos, {error_msg}")
+        return {"message": error_msg}, 500
+
+
 
 """ Metodos privados 
 
