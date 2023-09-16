@@ -5,9 +5,11 @@ from schemas.marca import MarcaSchema,MarcaEditSchema, apresenta_marca,ListaMarc
 
 from schemas.modelo import ModeloSchema,ModeloEditSchema,ModeloBuscaDelSchema, ModeloViewSchema,ListaModelosSchema,\
                            apresenta_modelo,apresenta_lista_modelo,ModeloBuscaPorMarcaSchema
+                           
+from schemas.cores import CorViewSchema, CorBuscaSchema, ListaCoresSchema, apresenta_cor, apresenta_lista_cores   
 
 from schemas.veiculo import VeiculoSchema,VeiculoViewSchema,VeiculoEditSchema,VeiculoBuscaDelSchema,\
                             ListaVeiculosSchema,apresenta_lista_veiculo,apresenta_veiculo, VeiculoBuscaPorModelo
 
-from schemas.cores import CorViewSchema, CorBuscaSchema, ListaCoresSchema, apresenta_cor, apresenta_lista_cores                         
+                      
                             

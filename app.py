@@ -538,7 +538,8 @@ def add_veiculo(form: VeiculoSchema):
     """ Adicionar o veículo """
     veiculo = Veiculo(
       placa = form.placa,
-      codigo_modelo= form.codigo_modelo
+      codigo_modelo= form.codigo_modelo,
+      codigo_cor = form.cor_id
     )
 
     logger.debug(f"Adicionando o veículo com a placa '{veiculo.des_placa}'")
@@ -598,6 +599,7 @@ def upd_veiculo(form: VeiculoEditSchema):
     codigo = form.codigo
     placa = form.placa
     codigo_modelo = form.modelo_id
+    codigo_cor = form.cor_id
 
     logger.debug(f"Editando o veículo com a placa {placa}")
     try:
@@ -612,25 +614,27 @@ def upd_veiculo(form: VeiculoEditSchema):
             logger.warning(
                 f"Erro ao adicionar o veiculo com a placa {placa} e modelo {codigo_modelo}, {error_msg}")
             return {"message": error_msg}, 404
+        
+
+        # validar se existe a placa em outro registro.
 
         # Consulta se ja existe a descricao com outro codigo
         veiculo = session.query(Veiculo)\
                              .filter(Veiculo.des_placa ==  placa
-                                , Veiculo.cod_modelo != codigo_modelo
-                                , Modelo.cod_veiculo == codigo
-                             ).first()
+                                , Veiculo.cod_veiculo != codigo).first()
 
         if veiculo:
             # se foi encontrado retorna sem dar o commit
-            error_msg = "Existe outro veiculo com\
-                         a mesma placa e outro modelo!"
+            error_msg = "Existe outro cadastro com a mesma placa e outro modelo!"
             logger.warning(
                 f"Erro ao editar o veiculo com a placa {placa}, {error_msg}")
             return {"message": error_msg}, 400
         else:            
             count = session.query(Veiculo)\
                           .filter(Veiculo.cod_veiculo == codigo)\
-                          .update({"des_placa": placa, "cod_modelo":codigo_modelo})
+                          .update({"des_placa": placa, \
+                                    "cod_modelo":codigo_modelo, \
+                                    "id_cor" : codigo_cor})
 
             session.commit()
             if count:
@@ -644,7 +648,7 @@ def upd_veiculo(form: VeiculoEditSchema):
                 return '', 404
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = f"Não foi possível editar a marca :/{e.__str__}"
+        error_msg = f"Não foi possível editar o veiculo  :/{e.__str__}"
         logger.warning(
             f"Erro ao editar o veículo com a placa '{placa}', {error_msg}")
         return {"message": error_msg}, 500

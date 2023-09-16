@@ -1,17 +1,13 @@
 from pydantic import BaseModel
-from model.modelo import Modelo
 from model.veiculo import Veiculo
-from model.marca import Marca
 from typing import List
-from model import Base
 
-from schemas import ModeloViewSchema, MarcaViewSchema
-
-
+from schemas import ModeloViewSchema, CorViewSchema
 class VeiculoSchema(BaseModel):
     """Define como um novo veiculo deve ser inserido """    
     placa: str = "ABC-1234"
     codigo_modelo: int = 1
+    cor_id: int = 1
    
 class VeiculoViewSchema(BaseModel):
     """ Define como uma veículo deverá retornado: modelo
@@ -20,6 +16,7 @@ class VeiculoViewSchema(BaseModel):
     placa: str = "ABC-1234"   
     codigo_modelo: int = 30
     modelo: ModeloViewSchema
+    cor: CorViewSchema
 
 
 class VeiculoEditSchema(BaseModel):
@@ -27,6 +24,7 @@ class VeiculoEditSchema(BaseModel):
     codigo: int = 1
     placa: str = 'ABC-1235'    
     modelo_id: int = 30
+    cor_id: int = 1
 
 
 class VeiculoBuscaDelSchema(BaseModel):
@@ -60,12 +58,18 @@ def apresenta_veiculo(veiculo: Veiculo):
         {
             "codigo": veiculo.cod_veiculo,
             "nome": veiculo.des_placa,
-            "codigo_modelo": veiculo.cod_modelo,
+            "codigo_modelo": veiculo.cod_modelo,            
             "modelo": [{"codigo": veiculo.modelo.cod_modelo, 
                         "nome":  veiculo.modelo.nom_modelo,
                         "codigo_marca": veiculo.modelo.cod_marca,
                         "marca": [{"codigo": veiculo.modelo.marca.cod_marca,"nome": veiculo.modelo.marca.nom_marca}]
                     }
+            ],
+            "cor": [
+                {
+                    "codigo": veiculo.cor.codigo,
+                    "nome": veiculo.cor.nome
+                }
             ]
         }
     }
@@ -88,7 +92,13 @@ def apresenta_lista_veiculo(lista: List[Veiculo]):
                                 "nome":  item.modelo.nom_modelo,
                                 "codigo_marca": item.modelo.cod_marca,
                                 "marca": [{"codigo": item.modelo.marca.cod_marca,"nome": item.modelo.marca.nom_marca}]
-                  }]
+                  }],
+            "cor": [
+                {
+                    "codigo": item.cor.codigo,
+                    "nome": item.cor.nome
+                }
+            ]
         })
 
     return {"lista": result}    
