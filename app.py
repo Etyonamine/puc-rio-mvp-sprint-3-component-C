@@ -102,7 +102,7 @@ def upd_marca(form: MarcaEditSchema):
 
         marca = session.query(Marca)\
                              .filter(Marca.nom_marca ==  nome_marca
-                                and Marca.cod_marca != codigo_marca
+                                    , Marca.cod_marca != codigo_marca
                              ).first()
 
         if marca:
@@ -330,11 +330,11 @@ def upd_modelo(form: ModeloEditSchema):
 
             # Consulta se ja existe a descricao com outro codigo        
             modelo = session.query(Modelo)\
-                                .filter(Modelo.nom_modelo ==  nome_modelo
-                                    and Modelo.cod_modelo != codigo_modelo
-                                    and Modelo.cod_marca == codigo_marca
+                                .filter(Modelo.nom_modelo ==  nome_modelo,
+                                        Modelo.cod_marca == codigo_marca,
+                                        Modelo.cod_modelo != codigo_modelo
                                 ).first()
-
+            print(modelo)
             if modelo:
                 # se foi encontrado retorna sem dar o commit
                 error_msg = "Existe outro registro com o mesmo nome e marca!"
@@ -611,8 +611,8 @@ def upd_veiculo(form: VeiculoEditSchema):
         # Consulta se ja existe a descricao com outro codigo
         veiculo = session.query(Veiculo)\
                              .filter(Veiculo.des_placa ==  placa
-                                and Veiculo.cod_modelo != codigo_modelo
-                                and Modelo.cod_veiculo == codigo
+                                , Veiculo.cod_modelo != codigo_modelo
+                                , Modelo.cod_veiculo == codigo
                              ).first()
 
         if veiculo:
