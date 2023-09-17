@@ -812,7 +812,7 @@ def get_cores():
         # criando conexão com a base
         session = Session()
         # fazendo a busca
-        lista = session.query(Cores).all()
+        lista = session.query(Cores).order_by(Cores.nome.asc()).all()
 
         if not lista:
             # se não há marcas cadastrados
