@@ -199,7 +199,7 @@ def get_marcas():
         # criando conexão com a base
         session = Session()
         # fazendo a busca
-        lista = session.query(Marca).all()
+        lista = session.query(Marca).order_by(Marca.nom_marca.asc()).all()
 
         if not lista:
             # se não há marcas cadastrados
@@ -429,7 +429,7 @@ def get_modelos():
         # criando conexão com a base
         session = Session()
         # fazendo a busca
-        lista = session.query(Modelo).all()
+        lista = session.query(Modelo).order_by(Modelo.nom_modelo.asc()).all()
 
         if not lista:
             # se não há marcas cadastrados
@@ -504,7 +504,7 @@ def get_modelo_por_id_marca (query: ModeloBuscaPorMarcaSchema):
         session = Session()
         # fazendo a busca
         modelos = session.query(Modelo)\
-                             .filter(Modelo.cod_marca == codigo_marca);
+                             .filter(Modelo.cod_marca == codigo_marca).order_by(Modelo.nom_modelo.asc());
 
         if not modelos:
             # se não há   cadastrado

@@ -1,4 +1,4 @@
-# Minha API - componente C
+# Minha API Veiculos - componente C
 
 Este API é a parte backend da entrega do MVP para o terceiro (3º) sprint do  **Curso de Pós Graduação em Engenharia de software** 
 
