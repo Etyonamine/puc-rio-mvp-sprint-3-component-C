@@ -58,7 +58,7 @@ def home():
 def add_marca(form: MarcaSchema):
     """ Adicionar a marca de veículo """
     marca = Marca(      
-      nome = form.nome
+      nome = form.nome.upper().strip()
     )
 
     logger.debug(f"Adicionando a marca de veículo com o nome '{marca.nom_marca}'")
@@ -95,7 +95,7 @@ def add_marca(form: MarcaSchema):
 def upd_marca(form: MarcaEditSchema):
     """Editar uma marca de veiculojá cadastrado na base """
     codigo_marca = form.codigo
-    nome_marca = form.nome
+    nome_marca = form.nome.upper().strip()
 
     logger.debug(f"Editando a marca de veículo #{codigo_marca}")
     try:
@@ -265,7 +265,7 @@ def get_marca_id(query: MarcaBuscaDelSchema):
 def add_modelo(form: ModeloSchema):
     """ Adicionar o modelo de veículo """
     modelo = Modelo(      
-      nome = form.nome,
+      nome = form.nome.upper().strip(),
       codigo_marca = form.codigo_marca
     )
 
@@ -313,7 +313,7 @@ def add_modelo(form: ModeloSchema):
 def upd_modelo(form: ModeloEditSchema):
     """Editar um modelo de veiculo já cadastrado na base """
     codigo_modelo = form.codigo
-    nome_modelo = form.nome
+    nome_modelo = form.nome.upper().strip()
     codigo_marca = form.marca_id
 
     logger.debug(f"Editando a marca de veículo #{codigo_modelo}")
@@ -537,7 +537,7 @@ def get_modelo_por_id_marca (query: ModeloBuscaPorMarcaSchema):
 def add_veiculo(form: VeiculoSchema):
     """ Adicionar o veículo """
     veiculo = Veiculo(
-      placa = form.placa,
+      placa = form.placa.upper().strip(),
       codigo_modelo= form.codigo_modelo,
       codigo_cor = form.cor_id
     )
@@ -597,7 +597,7 @@ def add_veiculo(form: VeiculoSchema):
 def upd_veiculo(form: VeiculoEditSchema):
     """Editar um veiculojá cadastrado na base """
     codigo = form.codigo
-    placa = form.placa
+    placa = form.placa.upper().strip()
     codigo_modelo = form.modelo_id
     codigo_cor = form.cor_id
 

@@ -57,7 +57,7 @@ def apresenta_veiculo(veiculo: Veiculo):
         "veiculo":
         {
             "codigo": veiculo.cod_veiculo,
-            "nome": veiculo.des_placa,
+            "placa": veiculo.des_placa,
             "codigo_modelo": veiculo.cod_modelo,            
             "modelo": [{"codigo": veiculo.modelo.cod_modelo, 
                         "nome":  veiculo.modelo.nom_modelo,
