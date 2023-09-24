@@ -726,7 +726,7 @@ def get_veiculos():
 
 # Consulta por código de veiculo
 @app.get('/veiculo_id', tags=[veiculo_tag],
-         responses={"200": ModeloViewSchema, "404": ErrorSchema,
+         responses={"200": VeiculoViewSchema, "404": ErrorSchema,
                     "500": ErrorSchema})
 def get_veiculo_id(query: VeiculoBuscaDelSchema):
     """Consulta um veiculo pelo codigo
@@ -796,6 +796,45 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
         logger.warning(
             f"Erro ao consultar os veículos, {error_msg}")
         return {"message": error_msg}, 500
+ 
+
+# Consulta por placa de veiculo
+@app.get('/veiculo_placa', tags=[veiculo_tag],
+         responses={"200": VeiculoViewSchema, "404": ErrorSchema,
+                    "500": ErrorSchema})
+def get_veiculo_por_placa(query: VeiculoBuscaPorPlacaSchema):
+    """Consulta um veiculo pela placa do veiculo
+
+    Retorna uma representação de  veículo
+    """
+
+    placa = query.placa
+
+    logger.debug( f"Consultando um veiculo por placa = #{placa} ")
+    try:
+        # criando conexão com a base
+        session = Session()
+        # fazendo a busca
+        veiculo = session.query(Veiculo)\
+                             .filter(Veiculo.des_placa == placa).first()
+        
+        if not veiculo:
+            # se não há registro cadastrado
+            error_msg = "Veiculo não encontrado na base :/"
+            logger.warning(f"Erro ao buscar o veículo , {error_msg}")
+            return '', 404
+        else:
+            logger.debug(
+                f"Veículo #{placa} encontrado")
+            # retorna a representação de  s
+            return apresenta_veiculo(veiculo), 200
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = f"Não foi possível consultar o veículo :/{str(e)}"
+        logger.warning(
+            f"Erro ao consultar o veículo, {error_msg}")
+        return {"message": error_msg}, 500
+
 
 
 # ***************************************************  Metodos do cores do veiculo ***************************************

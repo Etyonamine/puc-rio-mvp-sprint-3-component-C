@@ -27,6 +27,11 @@ class VeiculoEditSchema(BaseModel):
     cor_id: int = 1
 
 
+class VeiculoBuscaPorPlacaSchema(BaseModel):
+    """ Define como deve ser a busca por placa """
+    placa : str = 'ABC1234'
+    
+
 class VeiculoBuscaDelSchema(BaseModel):
     """ Define como a estrutura que representa a busca de delete.Que será
         feita apenas com o codigo do  .
@@ -73,7 +78,6 @@ def apresenta_veiculo(veiculo: Veiculo):
             ]
         }
     }
-
 
 
 def apresenta_lista_veiculo(lista: List[Veiculo]):
