@@ -188,7 +188,7 @@ def del_marca(form: MarcaBuscaDelSchema):
 
 # Consulta de todos as marcas
 @app.get('/marcas', tags=[marca_tag],
-         responses={"200": ListaMarcasSchema, "500": ErrorSchema})
+         responses={"200": ListaMarcasSchema,"404":ErrorSchema, "500": ErrorSchema})
 def get_marcas():
     """Consulta as marcas de veículos
 
@@ -200,10 +200,10 @@ def get_marcas():
         session = Session()
         # fazendo a busca
         lista = session.query(Marca).order_by(Marca.nom_marca.asc()).all()
-
+        error_msg = "Não foi encontrado registros!";
         if not lista:
             # se não há marcas cadastrados
-            return {"marcas": []}, 200
+            return {"message": error_msg}, 404
         else:
             logger.debug(f"%d marcas de veículos encontrados" %
                          len(lista))
@@ -242,7 +242,7 @@ def get_marca_id(query: MarcaBuscaDelSchema):
             # se não há   cadastrado
             error_msg_nao_encontrado = "Marca não encontrado na base :/"
             logger.warning(f"Erro ao buscar a marca de veículo , {error_msg_nao_encontrado}")
-            return {"message": error_msg}, 404
+            return {"message": error_msg_nao_encontrado}, 404
         else:
             logger.debug(
                 f"Marca do veículo #{codigo} encontrado")
@@ -250,16 +250,17 @@ def get_marca_id(query: MarcaBuscaDelSchema):
             return apresenta_marca(marca), 200
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = f"Não foi possível consultar a marca do veículo :/{str(e)}"
+        error_msg_nao_encontrado = f"Não foi possível consultar a marca do veículo :/{str(e)}"
         logger.warning(
-            f"Erro ao consultar a marca do veículo, {error_msg}")
-        return {"message": error_msg}, 500
+            f"Erro ao consultar a marca do veículo, {error_msg_nao_encontrado}")
+        return {"message": error_msg_nao_encontrado}, 500
 
 
 # ***************************************************  Metodos do modelo da marca do veiculo ***************************************
 # Novo registro na tabela modelo da marca do veiculo
 @app.post('/modelo', tags=[modelo_tag],
           responses={"201": ModeloViewSchema,
+                     "400": ErrorSchema,
                      "404": ErrorSchema,
                      "500": ErrorSchema})
 def add_modelo(form: ModeloSchema):
@@ -281,7 +282,7 @@ def add_modelo(form: ModeloSchema):
             # se não há   cadastrado
             error_msg = "Marca não encontrado na base :/"
             logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
-            return {"message": error_msg}, 404
+            return {"message": error_msg}, 400
         else:            
             # adicionando  
             session.add(modelo)
@@ -308,6 +309,7 @@ def add_modelo(form: ModeloSchema):
 # Edicao registro na tabela modelo da marca do veiculo
 @app.put('/modelo', tags=[modelo_tag],
          responses={"204": None,
+                    "400": ErrorSchema,
                     "404": ErrorSchema,
                     "500": ErrorSchema})
 def upd_modelo(form: ModeloEditSchema):
@@ -328,9 +330,9 @@ def upd_modelo(form: ModeloEditSchema):
 
         if not marca:
             # se não há   cadastrado
-            error_msg = "Marca não encontrado na base"
+            error_msg = "Marca não cadastrada"
             logger.warning(f"Erro ao buscar a marca de veículo , {error_msg}")
-            return {"message": error_msg}, 404
+            return {"message": error_msg}, 400
         else:      
 
             # Consulta se ja existe a descricao com outro codigo        
@@ -430,10 +432,10 @@ def get_modelos():
         session = Session()
         # fazendo a busca
         lista = session.query(Modelo).order_by(Modelo.nom_modelo.asc()).all()
-
+        error_msg = "Não foi encontrado registros!"
         if not lista:
             # se não há marcas cadastrados
-            return {"modelos": []}, 200
+            return {"message": error_msg}, 404
         else:
             logger.debug(f"%d modelos de veículos encontrados" %
                          len(lista))
@@ -532,6 +534,7 @@ def get_modelo_por_id_marca (query: ModeloBuscaPorMarcaSchema):
 # Novo registro na tabela veiculo
 @app.post('/veiculo', tags=[veiculo_tag],
           responses={"201": VeiculoViewSchema,
+                     "400": ErrorSchema,
                      "404": ErrorSchema,
                      "500": ErrorSchema})
 def add_veiculo(form: VeiculoSchema):
@@ -551,10 +554,10 @@ def add_veiculo(form: VeiculoSchema):
         modelo_veiculo = session.query(Modelo)\
                                 .filter(Modelo.cod_modelo == veiculo.cod_modelo).first()
         if not modelo_veiculo:
-            error_msg = "O modelo informado não existe no cadastro de modelos!"
+            error_msg = "O modelo informado não existe no cadastro!"
             logger.warning(
                 f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa} e modelo {veiculo.cod_modelo}, {error_msg}")
-            return {"message": error_msg}, 404
+            return {"message": error_msg}, 400
 
         # valida se já existe a placa com outro modelo de veiculo
         veiculo_pesquisado = session.query(Veiculo)\
@@ -696,7 +699,9 @@ def del_veiculo(form: VeiculoBuscaDelSchema):
 
 # Consulta de todos os modelos
 @app.get('/veiculos', tags=[veiculo_tag],
-         responses={"200": ListaVeiculosSchema, "500": ErrorSchema})
+         responses={"200": ListaVeiculosSchema,
+                    "404": ErrorSchema,
+                    "500": ErrorSchema})
 def get_veiculos():
     """Consulta os modelos de veículos
 
@@ -710,8 +715,9 @@ def get_veiculos():
         lista = session.query(Veiculo).all()
 
         if not lista:
+            error_msg = 'Não foi encontrado registros!'
             # se não há marcas cadastrados
-            return {"veiculos": []}, 200
+            return {"message": error_msg}, 404
         else:
             
             # retorna a representação de modelos
@@ -748,7 +754,7 @@ def get_veiculo_id(query: VeiculoBuscaDelSchema):
             # se não há registro cadastrado
             error_msg = "Veiculo não encontrado na base :/"
             logger.warning(f"Erro ao buscar o modelo de veículo , {error_msg}")
-            return '', 404
+            return error_msg, 404
         else:
             logger.debug(
                 f"Modelo do veículo #{codigo} encontrado")
@@ -765,6 +771,7 @@ def get_veiculo_id(query: VeiculoBuscaDelSchema):
 # Consulta por todos os veículos por código de modelo
 @app.get('/veiculo_modelo_id', tags=[veiculo_tag],
         responses={"200": ListaVeiculosSchema, 
+                   "400": ErrorSchema,
                    "404": ErrorSchema,
                    "500": ErrorSchema})
 def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
@@ -782,14 +789,19 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
         session = Session()
         # fazendo a busca
         lista = session.query(Veiculo).filter(Veiculo.cod_modelo == codigo_modelo)
-
+        
+        
+        # se não há marcas cadastrados
         if not lista:
-            # se não há marcas cadastrados
-            return {"message": error_msg}, 404
+
+            error_msg ="Não foi encontrado registros!"
+
+            return {"message:", error_msg}, 404
 
         else:            
-            # retorna a representação de modelos
+            # retorna a representação de modelos            
             return apresenta_lista_veiculo(lista), 200
+
     except Exception as e:
         # caso um erro fora do previsto
         error_msg = f"Não foi possível consultar os veiculos :/{str(e)}"
@@ -823,7 +835,7 @@ def get_veiculo_por_placa(query: VeiculoBuscaPorPlacaSchema):
             error_msg = "Veiculo não encontrado na base :/"
             logger.warning(f"Erro ao buscar o veículo , {error_msg}")
             return '', 404
-        else:
+        else:            
             logger.debug(
                 f"Veículo #{placa} encontrado")
             # retorna a representação de  s
@@ -840,7 +852,9 @@ def get_veiculo_por_placa(query: VeiculoBuscaPorPlacaSchema):
 # ***************************************************  Metodos do cores do veiculo ***************************************
 # Consulta de todas cores
 @app.get('/cores', tags=[cores_tag],
-         responses={"200": ListaCoresSchema, "500": ErrorSchema})
+         responses={"200": ListaCoresSchema, 
+                    "404": ErrorSchema,
+                    "500": ErrorSchema})
 def get_cores():
     """Consulta as cores de veículos
 
@@ -853,9 +867,11 @@ def get_cores():
         # fazendo a busca
         lista = session.query(Cores).order_by(Cores.nome.asc()).all()
 
+        # se não há marcas cadastrados
         if not lista:
             # se não há marcas cadastrados
-            return {"cores": []}, 200
+            error_msg = 'Não foi encontrado registros!';
+            return {"message" : error_msg}, 404
         else:            
             # retorna a representação de modelos
             return apresenta_lista_cores(lista), 200
