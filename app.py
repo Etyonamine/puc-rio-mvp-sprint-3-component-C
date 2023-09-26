@@ -203,7 +203,7 @@ def get_marcas():
         error_msg = "Não foi encontrado registros!";
         if not lista:
             # se não há marcas cadastrados
-            return {"message": error_msg}, 404
+            return {"lista": []}, 200
         else:
             logger.debug(f"%d marcas de veículos encontrados" %
                          len(lista))
@@ -435,7 +435,7 @@ def get_modelos():
         error_msg = "Não foi encontrado registros!"
         if not lista:
             # se não há marcas cadastrados
-            return {"message": error_msg}, 404
+            return {"lista": []}, 200
         else:
             logger.debug(f"%d modelos de veículos encontrados" %
                          len(lista))
@@ -509,10 +509,9 @@ def get_modelo_por_id_marca (query: ModeloBuscaPorMarcaSchema):
                              .filter(Modelo.cod_marca == codigo_marca).order_by(Modelo.nom_modelo.asc());
 
         if not modelos:
-            # se não há   cadastrado
-            error_msg = "Modelo não encontrado na base :/"
+            # se não há   cadastrado            
             logger.warning(f"Erro ao buscar os modelos com o codigo de marca , {error_msg}")
-            return {"message": error_msg}, 404
+            return {"lista": []}, 200
         else:
             logger.debug(f"Modelo do veículo #{modelos} encontrado");
 
@@ -796,7 +795,7 @@ def get_lista_veiculos_por_id_modelo(query: VeiculoBuscaPorModelo):
 
             error_msg ="Não foi encontrado registros!"
 
-            return {"message:", error_msg}, 404
+            return {"lista:",[]}, 200
 
         else:            
             # retorna a representação de modelos            
@@ -869,9 +868,8 @@ def get_cores():
 
         # se não há marcas cadastrados
         if not lista:
-            # se não há marcas cadastrados
-            error_msg = 'Não foi encontrado registros!';
-            return {"message" : error_msg}, 404
+            # se não há marcas cadastrados            
+            return {"lista" : []}, 200
         else:            
             # retorna a representação de modelos
             return apresenta_lista_cores(lista), 200
