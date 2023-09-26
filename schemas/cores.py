@@ -1,14 +1,32 @@
 from pydantic import BaseModel
 from typing import List
 from model.cores import Cores
- 
+
+class CorSchema(BaseModel):
+    """ Define como uma nova cor deve ser representada
+    
+    """
+    nome: str = 'Azul'
+
 class CorViewSchema(BaseModel):
     """ Define como uma cor de veículo deverá retornado: modelo
     """
     codigo: int = 1
     nome : str = 'Azul'
 
+class CorBuscaEditSchema(BaseModel):
+    """ Define como deverá ser passado as informação para a edição.
+    
+    """
+    codigo : int = 1
+    nome : str = 'verde'
 
+
+class CorDeleteSchema(BaseModel):
+    """ Define como a estrutura que vai fazer a exclusao da cor
+    
+    """
+    codigo: int = 1
 class CorBuscaSchema(BaseModel):
     """ Define como a estrutura que representa a busca de uma cor.Que será
         feita apenas com o codigo da cor .

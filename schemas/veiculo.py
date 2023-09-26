@@ -5,7 +5,7 @@ from typing import List
 from schemas import ModeloViewSchema, CorViewSchema
 class VeiculoSchema(BaseModel):
     """Define como um novo veiculo deve ser inserido """    
-    placa: str = "ABC-1234"
+    placa: str = "ABC1234"
     codigo_modelo: int = 1
     cor_id: int = 1
    
@@ -13,7 +13,7 @@ class VeiculoViewSchema(BaseModel):
     """ Define como uma veículo deverá retornado: modelo
     """
     codigo: int = 1
-    placa: str = "ABC-1234"   
+    placa: str = "ABC1234"   
     codigo_modelo: int = 30
     modelo: ModeloViewSchema
     cor: CorViewSchema
@@ -22,8 +22,8 @@ class VeiculoViewSchema(BaseModel):
 class VeiculoEditSchema(BaseModel):
     """Define como será recebido os dados para a edição """
     codigo: int = 1
-    placa: str = 'ABC-1235'    
-    modelo_id: int = 30
+    placa: str = 'ABC1235'    
+    modelo_id: int = 1
     cor_id: int = 1
 
 

@@ -558,13 +558,27 @@ def add_veiculo(form: VeiculoSchema):
                 f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa} e modelo {veiculo.cod_modelo}, {error_msg}")
             return {"message": error_msg}, 400
 
+        # validar a cor existe
+        cor_veiculo =  session.query(Cores)\
+                                .filter(Cores.codigo == veiculo.id_cor).first()
+        if not cor_veiculo:
+            error_msg = "A cor informada não existe no cadastro!"
+            logger.warning(
+                f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa}\
+                  e modelo {veiculo.cod_modelo}\
+                  e codigo de cor { veiculo.id_cor}, {error_msg}")
+
+            return {"message": error_msg}, 400
+
         # valida se já existe a placa com outro modelo de veiculo
         veiculo_pesquisado = session.query(Veiculo)\
-                             .filter(Veiculo.des_placa == veiculo.des_placa 
-                                     and Veiculo.cod_modelo != veiculo.codigo_modelo).first()
+                             .filter(Veiculo.des_placa ==\
+                                     veiculo.des_placa)\
+                             .first()
+
         if veiculo_pesquisado:
              # se foi encontrado retorna sem dar o commit
-            error_msg = "Existe outro modelo com a mesma placa!"
+            error_msg = "Já existe registro com esta placa!"
             logger.warning(
                 f"Erro ao adicionar o veiculo com a placa {veiculo.des_placa}, {error_msg}")
             return {"message": error_msg}, 400
@@ -588,6 +602,8 @@ def add_veiculo(form: VeiculoSchema):
         # caso um erro fora do previsto
         error_msg = "Não foi possível salvar novo item :/"
         logger.warning(f"Erro ao adicionar uma novo veículo, {error_msg}")
+        print (e.__str__)
+        print (e)
         return {"message": error_msg}, 400
 
 
@@ -617,6 +633,19 @@ def upd_veiculo(form: VeiculoEditSchema):
                 f"Erro ao adicionar o veiculo com a placa {placa} e modelo {codigo_modelo}, {error_msg}")
             return {"message": error_msg}, 404
         
+        # validar a cor existe
+        cor_veiculo =  session.query(Cores)\
+                              .filter(Cores.codigo == codigo_cor)\
+                              .first()
+        if not cor_veiculo:
+            error_msg = "A cor informada não existe no cadastro!"
+            logger.warning(
+                f"Erro ao adicionar o veiculo com a placa {placa}\
+                  e modelo {codigo_modelo}\
+                  e codigo de cor { codigo_cor}, {error_msg}")
+
+            return {"message": error_msg}, 400
+
 
         # validar se existe a placa em outro registro.
 
@@ -627,7 +656,7 @@ def upd_veiculo(form: VeiculoEditSchema):
 
         if veiculo:
             # se foi encontrado retorna sem dar o commit
-            error_msg = "Existe outro cadastro com a mesma placa e outro modelo!"
+            error_msg = "Já existe cadastro com esta placa!"
             logger.warning(
                 f"Erro ao editar o veiculo com a placa {placa}, {error_msg}")
             return {"message": error_msg}, 400
@@ -849,6 +878,170 @@ def get_veiculo_por_placa(query: VeiculoBuscaPorPlacaSchema):
 
 
 # ***************************************************  Metodos do cores do veiculo ***************************************
+# Novo registro na tabela cores
+@app.post('/cores', tags=[cores_tag],
+          responses={"201": CorViewSchema,
+                     "400": ErrorSchema,
+                     "404": ErrorSchema,
+                     "500": ErrorSchema})
+def add_cor(form: CorSchema):
+    """ Adicionar a cor """
+    cor = Cores(
+      nome = form.nome
+    )
+
+    logger.debug(f"Adicionando a cor   '{cor.nome}'")
+    try:
+        # criando conexão com a base
+        session = Session()
+
+        # valida se já existe a cor com outro codigo
+        validacao = session.query(Cores)\
+                             .filter(Cores.nome == cor.nome 
+                                     , Cores.codigo != cor.codigo).first()
+        if validacao:
+             # se foi encontrado retorna sem dar o commit
+            error_msg = "Existe outro registro com a mesma cor!"
+            logger.warning(
+                f"Erro ao adicionar a cor  {cor.nome}, {error_msg}")
+            return {"message": error_msg}, 400
+
+        # adicionando  
+        session.add(cor)
+        # efetivando o comando de adição de novo item na tabela
+        session.commit()
+        logger.debug(
+            f"Adicionado a cor : '{cor.nome}'")
+        return apresenta_cor(cor), 200
+
+    except IntegrityError as e:
+        # como a duplicidade do nome é a provável razão do IntegrityError
+        error_msg = f"A cor {cor.nome} já foi salvo anteriormente na base :/{e}"
+        logger.warning(
+            f"Erro ao adicionar cor = {cor.nome}', {error_msg}")
+        return {"message": error_msg}, 409
+
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = "Não foi possível salvar novo item :/"
+        logger.warning(f"Erro ao adicionar uma nova cor, {error_msg}")
+        return {"message": error_msg}, 400
+
+
+# Novo registro na tabela cores
+@app.put('/cores', tags=[cores_tag],
+          responses={"201": CorViewSchema,
+                     "400": ErrorSchema,
+                     "404": ErrorSchema,
+                     "500": ErrorSchema})
+def upd_cor(form: CorBuscaEditSchema):
+    """ Editar o veículo """
+    codigo_param = form.codigo
+    nome_param = form.nome
+    
+    logger.debug(f"editando a cor '{nome_param}'")
+    try:
+        # criando conexão com a base
+        session = Session()
+
+        # valida se já existe a cor com outro codigo
+        validacao = session.query(Cores)\
+                             .filter(Cores.nome == nome_param
+                                     , Cores.codigo != codigo_param).first()
+        if validacao:
+             # se foi encontrado retorna sem dar o commit
+            error_msg = "Existe outro registro com a mesma cor!"
+            logger.warning(
+                f"Erro ao adicionar a cor  {nome_param}, {error_msg}")
+            return {"message": error_msg}, 400
+
+        # editando
+        count = session.query(Cores)\
+                        .filter(Cores.codigo == codigo_param)\
+                        .update({"nome": nome_param})
+
+        
+        if count:
+            # retorna sem representação com apenas o codigo http 204
+            logger.debug(f"Editado a cor {nome_param}")
+            session.commit()
+            return '', 204
+        else:
+            error_msg = f"A cor {nome_param} não foi encontrado na base"
+            logger.warning(
+                f"Erro ao editar a cor'{nome_param}', {error_msg}")
+            return '', 404        
+
+    except IntegrityError as e:
+        # como a duplicidade do nome é a provável razão do IntegrityError
+        error_msg = f"A cor {nome_param} já foi salvo anteriormente na base :/{e}"
+        logger.warning(
+            f"Erro ao editar a cor = {nome_param}', {error_msg}")
+        return {"message": error_msg}, 409
+
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = "Não foi possível salvar o registro :/"
+        logger.warning(f"Erro ao editar a cor, {error_msg}")
+        print(error)
+        return {"message": error_msg}, 400
+
+
+
+# Remoção de um registro de cor
+@app.delete('/cores', tags=[cores_tag],
+            responses={"204": None,
+                       "404": ErrorSchema, 
+                       "500": ErrorSchema
+                       }
+            )
+def del_cor(form: CorDeleteSchema):
+    """Exclui um registro da base de dados através do atributo codigo
+
+    Retorna uma mensagem de exclusão com sucesso.
+    """
+    codigo = form.codigo
+    logger.debug(f"Excluindo a cor com o código #{codigo}")
+    try:      
+    
+        # criando conexão com a base
+        session = Session()
+
+        # consulta na tabela de veículo.
+        veiculo = session.query(Veiculo)\
+                         .filter(Veiculo.id_cor == codigo)\
+                         .first
+        
+        if veiculo:
+            error_msg = "A cor está associado há um registro de veículo"
+            return {"message:", error_msg}, 404
+
+        # fazendo a remoção
+        count = session.query(Cores).filter(
+            Cores.codigo == codigo).delete()
+
+        session.commit()
+
+        if count:
+            # retorna sem representação com apenas o codigo http 204
+            logger.debug(f"Excluido a cor com o codigo #{codigo}")
+            return '', 204
+        else:
+            # se o registro não for encontrado retorno o codigo http 404
+            error_msg = "A cor não foi encontrado na base"
+            logger.warning(
+                f"Erro ao excluir a cor de veiculo \
+                 codigo #'{codigo}', {error_msg}")
+            return '', 404
+    except Exception as e:
+        # caso um erro fora do previsto
+        error_msg = f"Não foi possível excluir a cor :/{e}"
+        logger.warning(
+            f"Erro ao excluir a cor com\
+            o codigo #'{codigo}', {error_msg}")
+        return {"message": error_msg}, 500
+
+
 # Consulta de todas cores
 @app.get('/cores', tags=[cores_tag],
          responses={"200": ListaCoresSchema, 
