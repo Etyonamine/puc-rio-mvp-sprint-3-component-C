@@ -130,7 +130,5 @@ dmypy.json
 
 # pasta de log
 .log/
-
-#
-/log/
 log/
+
