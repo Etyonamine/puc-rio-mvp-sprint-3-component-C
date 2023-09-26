@@ -716,7 +716,7 @@ def get_veiculos():
         if not lista:
             error_msg = 'Não foi encontrado registros!'
             # se não há marcas cadastrados
-            return {"message": error_msg}, 404
+            return {"lista": []}, 200
         else:
             
             # retorna a representação de modelos
