@@ -1006,16 +1006,7 @@ def del_cor(form: CorDeleteSchema):
     
         # criando conexão com a base
         session = Session()
-
-        # consulta na tabela de veículo.
-        veiculo = session.query(Veiculo)\
-                         .filter(Veiculo.id_cor == codigo)\
-                         .first
-        
-        if veiculo:
-            error_msg = "A cor está associado há um registro de veículo"
-            return {"message:", error_msg}, 404
-
+ 
         # fazendo a remoção
         count = session.query(Cores).filter(
             Cores.codigo == codigo).delete()
