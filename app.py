@@ -750,9 +750,11 @@ def get_veiculos():
             
             # retorna a representação de modelos
             return apresenta_lista_veiculo(lista), 200
+
     except Exception as e:
         # caso um erro fora do previsto
         error_msg = f"Não foi possível consultar os veiculos :/{str(e)}"
+        print (e)
         logger.warning(
             f"Erro ao consultar os veículos, {error_msg}")
         return {"message": error_msg}, 500
@@ -1006,7 +1008,14 @@ def del_cor(form: CorDeleteSchema):
     
         # criando conexão com a base
         session = Session()
- 
+        # verificando no cadastro de veiculo
+        veiculo = session.query(Veiculo)\
+                         .filter(Veiculo.id_cor == codigo).first()
+
+        if veiculo:
+            error_msg = 'Existe um veículo com esta cor associada! Não se pode excluir.'
+            return {"message:": error_msg}, 400
+            
         # fazendo a remoção
         count = session.query(Cores).filter(
             Cores.codigo == codigo).delete()

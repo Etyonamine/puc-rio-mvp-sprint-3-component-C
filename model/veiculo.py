@@ -16,6 +16,7 @@ class Veiculo(Base):
 
     ## criar o vinculo com o modelo do veiculo
     modelo = relationship("Modelo", back_populates="veiculos")
+    
     cor = relationship("Cores", back_populates = "veiculos_cores")
         
     def __init__(self, placa: str, codigo_modelo: Integer, codigo_cor: Integer):
